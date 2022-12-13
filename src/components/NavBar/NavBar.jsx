@@ -34,7 +34,8 @@ const NavBar = () => {
                 color="inherit"
                 edge="start"
                 style={{ outline: 'none'}}
-                onClick={() => {}}
+                // toggle the sidebar on when in mobile
+                onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)} // sets the Mobile function to a different state it was previously
                 className={classes.menuButton}
               >
                 <Menu />
@@ -91,7 +92,9 @@ const NavBar = () => {
                   variant='temporary'
                   anchor='right'
                   open={mobileOpen} // a state which tell if its mobile open or not
-                  className={classes.drawerBacground}
+                  // fire on close --> we toggle 
+                  onClose={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
+                  className={classes.drawerBackground}
                   classes={{paper: classes.drawerPaper}} //sepcial way of adding styles or classes from MUI components / overide exisitng components
                   ModalProps={{keepMounted:true}}
                 >
