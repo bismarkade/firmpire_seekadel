@@ -22,8 +22,8 @@ const Sidebar = ( {setMobileOpen}) => {
             src={theme.palette.mode === 'light' ?  redLogo : blueLogo }
             alt="FilmpireLogo"
         />
-         
       </Link> 
+      {/* <Divider /> */}
     </>
   );
 };
