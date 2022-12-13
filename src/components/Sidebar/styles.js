@@ -9,6 +9,6 @@ export default makeStyles(() => ({
      },
 
      image: {
-        width: '70%'
+        width: '70%',
      }
 }));
