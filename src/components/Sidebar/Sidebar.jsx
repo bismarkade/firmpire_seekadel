@@ -43,6 +43,10 @@ const Sidebar = ( {setMobileOpen}) => {
         />
       </Link> 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> fd850545d753918a7a774ba6acc64d537e75acaa
       <Divider />
       <List>
         <ListSubheader>Categories</ListSubheader>
@@ -98,9 +102,15 @@ const Sidebar = ( {setMobileOpen}) => {
         ))}
       </List>
 
+<<<<<<< HEAD
 =======
       {/* <Divider /> */}
 >>>>>>> main
+=======
+
+      {/* <Divider /> */}
+
+>>>>>>> fd850545d753918a7a774ba6acc64d537e75acaa
     </>
   );
 };
