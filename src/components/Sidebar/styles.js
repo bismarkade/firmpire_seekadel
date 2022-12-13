@@ -10,6 +10,7 @@ export default makeStyles((theme) => ({
 
      image: {
         width: '70%',
+<<<<<<< HEAD
      },
 
      links: {
@@ -22,4 +23,7 @@ export default makeStyles((theme) => ({
          filter: theme.palette.mode === 'dark' ? 'dark' : 'invert(1)',
 
      },
+=======
+     }
+>>>>>>> main
 }));

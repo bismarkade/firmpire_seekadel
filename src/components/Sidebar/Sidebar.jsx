@@ -42,6 +42,7 @@ const Sidebar = ( {setMobileOpen}) => {
             alt="Filmpire Logo"
         />
       </Link> 
+<<<<<<< HEAD
       <Divider />
       <List>
         <ListSubheader>Categories</ListSubheader>
@@ -97,6 +98,9 @@ const Sidebar = ( {setMobileOpen}) => {
         ))}
       </List>
 
+=======
+      {/* <Divider /> */}
+>>>>>>> main
     </>
   );
 };
