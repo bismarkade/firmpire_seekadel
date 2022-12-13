@@ -1,6 +1,6 @@
 import React , {useState} from 'react';
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
-import { Menu, AccountCircle, Brightness4, Brightness7, NoBackpackSharp} from '@mui/icons-material';
+import { Menu, AcUnit, AccountCircle, Brightness4, Brightness7, NoBackpackSharp} from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
@@ -9,8 +9,8 @@ import { Sidebar} from '..';
 import useStyles from  './styles';
 
 const NavBar = () => {
-  // use State
-  const [mobileOpen, setMobileOpen] = useState(false)
+  // use State to track if app is used a mobile or not
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   // Hook for custom styles 
   const classes = useStyles();
@@ -28,6 +28,7 @@ const NavBar = () => {
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
            {/* implement media Query here */}
+           {/* if mobile view */}
            {isMobile && (
               <IconButton 
                 color="inherit"
@@ -37,6 +38,7 @@ const NavBar = () => {
                 className={classes.menuButton}
               >
                 <Menu />
+
               </IconButton>
            ) }
            <IconButton 
@@ -82,26 +84,35 @@ const NavBar = () => {
       </AppBar>
       <div>
         <nav className={classes.drawer}>
-            {/* compoents if mobile or otherwise (desktop) */}
+            {/* components if mobile or otherwise (desktop) */}
+           
             {isMobile ? (
                 <Drawer
                   variant='temporary'
                   anchor='right'
-                  open={mobileOpen}
-                  classes={{paper: classes.drawerPaper}}
+                  open={mobileOpen} // a state which tell if its mobile open or not
+                  className={classes.drawerBacground}
+                  classes={{paper: classes.drawerPaper}} //sepcial way of adding styles or classes from MUI components / overide exisitng components
                   ModalProps={{keepMounted:true}}
                 >
-                  {/* Create the sidebar component in the Drawer  */}
+                  {/* Create the sidebar component in the Drawer  and parse the setMobileOpen State there
+                  -> this will ensure we are able to modify from in there */}
                   <Sidebar setMobileOpen={setMobileOpen} />
                 </Drawer>
               ) : (
-                <Drawer>
+                <Drawer 
+                  classes={{ paper: classes.drawerpaper }}
+                  variant='permanent'
+                  open // always set to true on desktop
+                >
                   <Sidebar setMobileOpen={setMobileOpen} />
                 </Drawer>
 
               )}
         </nav>
+        
       </div>
+    
     </>
   );
 };
