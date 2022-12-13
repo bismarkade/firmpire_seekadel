@@ -18,7 +18,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.4",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^2.1.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -46,11 +46,20 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.workingDirectories": [
+    "./client",
+    "./server"
+  ],
+  "files.exclude": {
+    "**/.git": false
   }
 }
