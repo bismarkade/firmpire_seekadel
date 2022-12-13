@@ -23,8 +23,8 @@ const Sidebar = ( {setMobileOpen}) => {
             src={theme.palette.mode === 'light' ?  redLogo : blueLogo }
             alt="Filmpire Logo"
         />
-         
       </Link> 
+      {/* <Divider /> */}
     </>
   );
 };
