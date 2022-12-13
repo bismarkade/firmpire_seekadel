@@ -92,7 +92,6 @@ const NavBar = () => {
                   variant='temporary'
                   anchor='right'
                   open={mobileOpen} // a state which tell if its mobile open or not
-
                   // fire on close --> we toggle 
                   onClose={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
                   className={classes.drawerBackground}
