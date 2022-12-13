@@ -10,11 +10,6 @@ export default makeStyles((theme) => ({
 
      image: {
         width: '70%',
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> fd850545d753918a7a774ba6acc64d537e75acaa
      },
 
      links: {
@@ -27,13 +22,6 @@ export default makeStyles((theme) => ({
          filter: theme.palette.mode === 'dark' ? 'dark' : 'invert(1)',
 
      },
-<<<<<<< HEAD
-=======
-     }
->>>>>>> main
-=======
 
-     }
-
->>>>>>> fd850545d753918a7a774ba6acc64d537e75acaa
-}));
+   })
+);
