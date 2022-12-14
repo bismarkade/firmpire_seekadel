@@ -4,6 +4,7 @@ import { Divider, List, ListItemText, ListSubheader,
 import {Link} from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 
+import { useGetGenresQuery } from '../../services/TMBD';
 import useStyles from './styles';
 
 // larger category mock data
@@ -32,6 +33,9 @@ const blueLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48
 const Sidebar = ( {setMobileOpen}) => {
     const theme = useTheme(); 
     const classes = useStyles();
+    const {data, isFetching } = useGetGenresQuery();
+
+    console.log(data);
 
   return (
     <>
@@ -74,12 +78,17 @@ const Sidebar = ( {setMobileOpen}) => {
       <Divider />
       <List>
         <ListSubheader>Genres</ListSubheader>
-        {demoCategories.map(({label , value}) => (
+
+        {isFetching ? ( 
+            <Box display='flex' justifyContent='center' >
+              <CircularProgress />
+            </Box>
+        ) : data.genres.map(({name , id}) => (
           // we use () instead of {} because we want to instantly return it
 
           // we want to display a link for each category 
           <Link 
-            key={value}
+            key={name}
             className={classes.links}
             to="/"
            >
@@ -91,7 +100,7 @@ const Sidebar = ( {setMobileOpen}) => {
                   <img src={redLogo}  className={classes.genreImages} height={30}  />
                 </ListItemIcon> */}
 
-                <ListItemText primary={label} />
+                <ListItemText primary={name} />
 
             </ListItem>
           </Link>
