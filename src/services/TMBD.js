@@ -16,6 +16,11 @@ export const tmdbApi = createApi({
     // the callback funtion instantly returns a Object () => ({})
 
     endpoints: (builder) => ({ 
+        //* Get Genres
+        getGenres: builder.query({
+            query:() => `genre/movie/list?api_key=${tmdbApiKey}`
+        }),
+
         // * Get Movies by [type]
         getMovies: builder.query({
             // get popular movies
@@ -27,5 +32,6 @@ export const tmdbApi = createApi({
 
 export const {
     //  redux tool kit automaticall create a hook for us
+    useGetGenresQuery,
     useGetMoviesQuery,
 } = tmdbApi;

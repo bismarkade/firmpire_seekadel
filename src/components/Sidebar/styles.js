@@ -19,7 +19,7 @@ export default makeStyles((theme) => ({
 
      genreImages: {
       // change color depending on dark or light mode
-         filter: theme.palette.mode === 'dark' ? 'dark' : 'invert(1)',
+         filter: theme.palette.mode === 'light' ? 'dark' : 'invert(1)',
 
      },
 

@@ -40,6 +40,7 @@ const Movies = () => {
     <div>
     {/* parse movies as props with the data from the api */}
     <MovieList movies={data} />
+    
     </div>
   );
 };
