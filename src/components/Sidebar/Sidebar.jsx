@@ -6,7 +6,9 @@ import { useTheme } from '@mui/styles';
 
 import { useGetGenresQuery } from '../../services/TMBD';
 import useStyles from './styles';
+import genreIcons from '../../assets/genres';
 
+// console.log(genreIcons['action']);
 // larger category mock data
 const categories = [
   {label: 'Popular', value: 'popular'},
@@ -64,9 +66,9 @@ const Sidebar = ( {setMobileOpen}) => {
                 onClick={() => {}}
                 button // the list item should be a button
               >
-                {/* <ListItemIcon>
-                  <img src={redLogo}  className={classes.genreImages} height={30}  />
-                </ListItemIcon> */}
+                <ListItemIcon>
+                  <img src={genreIcons[label.toLowerCase()]}  className={classes.genreImages} height={30}  />
+                </ListItemIcon>
 
                 <ListItemText primary={label} />
 
@@ -96,9 +98,9 @@ const Sidebar = ( {setMobileOpen}) => {
                 onClick={() => {}}
                 button // the list item should be a button
               >
-                {/* <ListItemIcon>
-                  <img src={redLogo}  className={classes.genreImages} height={30}  />
-                </ListItemIcon> */}
+                <ListItemIcon>
+                  <img src={genreIcons[name.toLowerCase()]}  className={classes.genreImages} height={30}  />
+                </ListItemIcon>
 
                 <ListItemText primary={name} />
 
