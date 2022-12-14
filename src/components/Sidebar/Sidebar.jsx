@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Divider, List, listItem, ListItemText, ListSubheader, 
+import { Divider, List, ListItemText, ListSubheader, 
         ListItemIcon, Box, CircularProgress, ListItem} from '@mui/material';
 import {Link} from 'react-router-dom';
 import { useTheme } from '@mui/styles';
@@ -32,6 +32,7 @@ const blueLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48
 const Sidebar = ( {setMobileOpen}) => {
     const theme = useTheme(); 
     const classes = useStyles();
+
   return (
     <>
       <Link to="/" className={classes.imageLink}>

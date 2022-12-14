@@ -8,7 +8,7 @@ import {MovieList} from '..';
 
 const Movies = () => {
   const { data, error, isFetching } = useGetMoviesQuery();
-  // console.log(data);
+  console.log(data);
 
   if(isFetching){
     return (
@@ -40,6 +40,7 @@ const Movies = () => {
     <div>
     {/* parse movies as props with the data from the api */}
     <MovieList movies={data} />
+    
     </div>
   );
 };
