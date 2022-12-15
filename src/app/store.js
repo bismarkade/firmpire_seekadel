@@ -4,6 +4,7 @@ import { tmdbApi } from "../services/TMBD";
 import genreOrCategoryReducer from '../features/currentGenreOrCategory';
 
 export default configureStore({
+    // provide the reducer objects and speci
     reducer: {
         [tmdbApi.reducerPath]: tmdbApi.reducer,
         currentGenreOrCategory: genreOrCategoryReducer,
@@ -12,3 +13,4 @@ export default configureStore({
 });
 
 // will be access at src/index.js  --> the entry point 
+

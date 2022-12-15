@@ -1,4 +1,4 @@
-// will make all the calles to the TMBD API
+// will make all the calls to the TMBD API
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -21,12 +21,12 @@ export const tmdbApi = createApi({
             query:() => `genre/movie/list?api_key=${tmdbApiKey}`
         }),
 
-        // * Get Movies by [type]
+        // * Get Movies by [Type]
         getMovies: builder.query({
             // get popular movies
             query: ({ genreIdOrCategoryName, page }) => {
 
-                //* Get Movies by Cartegory (popular, top_rated, upcoming -> string)
+                //* Get Movies by Category (popular, top_rated, upcoming -> string)
                 if(genreIdOrCategoryName && typeof genreIdOrCategoryName === 'string'){
                     return `movie/${genreIdOrCategoryName}?page=${page}&api_key=${tmdbApiKey}`;
                 }
@@ -44,7 +44,7 @@ export const tmdbApi = createApi({
 
 
 export const {
-    //  redux tool kit automaticall create a hook for us
+    //  redux tool kit automatically create a hook for us
     useGetGenresQuery,
     useGetMoviesQuery,
 } = tmdbApi;

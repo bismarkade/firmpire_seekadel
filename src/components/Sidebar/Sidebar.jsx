@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { Divider, List, ListItemText, ListSubheader, 
-        ListItemIcon, Box, CircularProgress, ListItem} from '@mui/material';
+import { Divider, List, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress, ListItem} from '@mui/material';
 import {Link} from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,8 +35,9 @@ const Sidebar = ( {setMobileOpen}) => {
     const {data, isFetching } = useGetGenresQuery();
     const dispatch = useDispatch();
 
+    // console.log('genreIdOrCategoryName:');
     // console.log(data);
-    // console.log(genreOrCategoryName);
+    // console.log(genreIdOrCategoryName);
   return (
     <>
       <Link to="/" className={classes.imageLink}>

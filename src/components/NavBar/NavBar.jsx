@@ -4,7 +4,7 @@ import { Menu, AcUnit, AccountCircle, Brightness4, Brightness7, NoBackpackSharp}
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
-import { Sidebar} from '..';
+import { Search, Sidebar} from '..';
 // Import custom style
 import useStyles from  './styles';
 
@@ -50,7 +50,7 @@ const NavBar = () => {
             {theme.palette.mode === 'dark' ? <Brightness7/> : <Brightness4/>}
            </IconButton>
            {/* render a search component if its not mobile */}
-           {!isMobile && ('..search')}
+           {!isMobile && <Search />}
           
           <div>
            {/* Show info if  authencated and not */}
@@ -80,7 +80,7 @@ const NavBar = () => {
                 </Button>
             )}
           </div>
-          {isMobile && ('..search')}
+          {isMobile && <Search />}
         </Toolbar>
       </AppBar>
       <div>
