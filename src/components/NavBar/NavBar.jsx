@@ -1,29 +1,44 @@
-import React , {useState} from 'react';
+import React , {useEffect, useState} from 'react';
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
 import { Menu, AcUnit, AccountCircle, Brightness4, Brightness7, NoBackpackSharp} from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
-import {fetchToken} from './../../utils/index';
+import {fetchToken, createSessionId, moviesApi } from './../../utils/index';
 import { Search, Sidebar} from '..';
 // Import custom style
 import useStyles from  './styles';
 
 const NavBar = () => {
-
-  // use State to track if app is used a mobile or not
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  // Hook for custom styles 
   const classes = useStyles();
-
-  // hook for mobile media query 
   const isMobile = useMediaQuery('(max-width:600px)');
-
-  // Hook for usetheme--> can use to check if we are dark or white mode
   const theme = useTheme();
-
   const isAuthenticated = false;
+
+  const token = localStorage.getItem('request_token');
+  const sessionIdFromLocalStorage = localStorage.getItem('session_id');
+
+  //will call the useEffect whenever the token changes 
+  useEffect(() => {
+    const logInUser = async () => {
+      // check if token exist
+      if(token){
+        // check if local storage sessionID exist
+        if(sessionIdFromLocalStorage){
+          // then get the user data 
+
+          // destructure and rename to userData
+          const { data : userData } = await moviesApi.get(`/account?session_id=${sessionIdFromLocalStorage}`)
+        }else {
+          const sessionId = await createSessionId();
+
+          const { data : userData } = await moviesApi.get(`/account?session_id=${sessionId}`);
+        }
+      }
+    }
+  }, [token])
+  
 
   return (
     <>
