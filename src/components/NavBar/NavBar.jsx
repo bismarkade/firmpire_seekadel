@@ -4,11 +4,13 @@ import { Menu, AcUnit, AccountCircle, Brightness4, Brightness7, NoBackpackSharp}
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
+import {fetchToken} from './../../utils/index';
 import { Search, Sidebar} from '..';
 // Import custom style
 import useStyles from  './styles';
 
 const NavBar = () => {
+
   // use State to track if app is used a mobile or not
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -21,7 +23,7 @@ const NavBar = () => {
   // Hook for usetheme--> can use to check if we are dark or white mode
   const theme = useTheme();
 
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <>
@@ -57,7 +59,7 @@ const NavBar = () => {
            {!isAuthenticated ? (
                 <Button 
                   color='inherit'
-                  onClick={()=> {}}
+                  onClick={fetchToken}
                   >
                     login &nbsp; <AccountCircle />
                 </Button>
