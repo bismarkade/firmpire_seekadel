@@ -39,12 +39,13 @@ export const createSessionId = async () => {
     if(token){
         try {
             // const response = moviesApi.post('authentication/session/new', {
-            
+            console.log("in token utils 42");
+            console.log("request token:", token);
             // destructure to get the data
-            const {data: { session_id } } = moviesApi.post('authentication/session/new', {
+            const {data: { session_id } } =await moviesApi.post('authentication/session/new', {
                 request_token: token, 
             });
-
+            console.log(session_id);
             localStorage.setItem('session_id', session_id);
 
             return session_id;
