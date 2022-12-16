@@ -10,7 +10,17 @@ import { useGetMovieQuery } from '../../services/TMBD';
 const MovieInformation = () => {
   const  { id } = useParams();
   const { data, isFetching , error } = useGetMovieQuery(id);
-  console.log(data);
+  // console.log(data);
+
+  if(isFetching){
+    return ( 
+    <Box display='flex' justifyContent='center' alignContent='center'> 
+      <CircularProgress size='8rem' />
+    </Box>
+    )
+  }
+
+
 
   return (
     <div>
