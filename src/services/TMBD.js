@@ -43,6 +43,12 @@ export const tmdbApi = createApi({
                return `movie/popular?page=${page}&api_key=${tmdbApiKey}`;
             },
         }),
+
+        //* Get Movie (one movie)
+        getMovie: builder.query({
+            query: (id) => `/movie/${id}?append_to_response=videos,credits&api_key=${tmdbApiKey}`  
+        }),
+
     }),
 });
 
@@ -51,4 +57,5 @@ export const {
     //  redux tool kit automatically create a hook for us
     useGetGenresQuery,
     useGetMoviesQuery,
+    useGetMovieQuery,
 } = tmdbApi;
