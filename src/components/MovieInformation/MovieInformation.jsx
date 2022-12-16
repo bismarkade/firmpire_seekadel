@@ -19,6 +19,13 @@ const MovieInformation = () => {
     </Box>
     )
   }
+  if(error){
+    return ( 
+    <Box display='flex' justifyContent='center' alignContent='center'> 
+      <Link to='/'>Something has gone wrong - go back</Link>
+    </Box>
+    )
+  }
 
 
 
