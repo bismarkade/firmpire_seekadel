@@ -7,7 +7,10 @@ import axios from 'axios';
 
 import { useGetMovieQuery } from '../../services/TMBD';
 
+import useStyles from './styles';
+
 const MovieInformation = () => {
+  const classes = useStyles();
   const  { id } = useParams();
   const { data, isFetching , error } = useGetMovieQuery(id);
   // console.log(data);
@@ -27,12 +30,36 @@ const MovieInformation = () => {
     )
   }
 
-
-
   return (
-    <div>
-        MovieInformation {id}
-    </div>
+    <Grid container className={classes.containerSpaceAround} >
+      <Grid item sm={12} lg={4} >
+          <img 
+             className={classes.poster}
+              // src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
+              alt={data.title}
+          />
+      </Grid>
+      <Grid item container direction='column' lg={7} >
+        <Typography variant='h3' align='center' gutterButtom>
+          {data.title} ({data.release_date.split('-')[0]})
+        </Typography>
+        <Typography variant='h5' align='center' gutterButtom>
+          {data.tagline} 
+        </Typography>
+        <Grid item className={classes.containerSpaceAround} >
+          <Box display='flex' align='center'>
+            <Rating readOnly value={data.vote_average / 2} />  
+            <Typography variant='subtitle1' gutterButtom style={{ marginLeft: '10px'}} >
+            {data.vote_average} / 10
+          </Typography>
+          </Box>
+          <Typography variant='h6' align='center'  gutterButtom >
+            {data.runtime}min  {data.spoken_languages.length > 0 ? `/ ${data.spoken_languages[0].name} `: ''  }
+          </Typography>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
