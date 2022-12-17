@@ -6,14 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { useGetMovieQuery } from '../../services/TMBD';
+import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 import useStyles from './styles';
+import genreIcons from '../../assets/genres';
 
 const MovieInformation = () => {
   const classes = useStyles();
   const  { id } = useParams();
   const { data, isFetching , error } = useGetMovieQuery(id);
-  // console.log(data);
+  const dispatch = useDispatch();
+
+  console.log(data);
 
   if(isFetching){
     return ( 
@@ -55,9 +59,20 @@ const MovieInformation = () => {
           </Typography>
           </Box>
           <Typography variant='h6' align='center'  gutterButtom >
-            {data.runtime}min  {data.spoken_languages.length > 0 ? `/ ${data.spoken_languages[0].name} `: ''  }
+            {data.runtime} min  {data.spoken_languages.length > 0 ? `/ ${data.spoken_languages[0].name} `: ''  }
           </Typography>
         </Grid>
+        <Grid item className={classes.genresContainer} >
+          {data.genres.map((genre, i) => (
+            <Link  key={genre.name} className={classes.links} to='/' onClick={() => dispatch(selectGenreOrCategory(genre.id))} >
+              <img src={genreIcons[genre.name.toLowerCase()]}  className={classes.genreImage} height={30}  />
+              <Typography color='textPrimary' variant='subtitle1' >
+                {genre.name}
+               </Typography>
+            </Link> 
+          ))}
+        </Grid>
+        
       </Grid>
     </Grid>
   );
