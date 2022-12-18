@@ -45,20 +45,20 @@ const MovieInformation = () => {
           />
       </Grid>
       <Grid item container direction='column' lg={7} >
-        <Typography variant='h3' align='center' gutterButtom>
+        <Typography variant='h3' align='center' gutterBottom>
           {data.title} ({data.release_date.split('-')[0]})
         </Typography>
-        <Typography variant='h5' align='center' gutterButtom>
+        <Typography variant='h5' align='center' gutterBottom>
           {data.tagline} 
         </Typography>
         <Grid item className={classes.containerSpaceAround} >
           <Box display='flex' align='center'>
             <Rating readOnly value={data.vote_average / 2} />  
-            <Typography variant='subtitle1' gutterButtom style={{ marginLeft: '10px'}} >
+            <Typography variant='subtitle1' gutterBottom style={{ marginLeft: '10px'}} >
             {data.vote_average} / 10
           </Typography>
           </Box>
-          <Typography variant='h6' align='center'  gutterButtom >
+          <Typography variant='h6' align='center'  gutterBottom >
             {data.runtime} min  {data.spoken_languages.length > 0 ? `/ ${data.spoken_languages[0].name} `: ''  }
           </Typography>
         </Grid>
@@ -71,6 +71,28 @@ const MovieInformation = () => {
                </Typography>
             </Link> 
           ))}
+        </Grid>
+        <Typography variant='h5' gutterBottom style={{ marginTop: '10px'}}> 
+            Overview
+        </Typography>
+        <Typography style={{ marginButtom: '2rem'}} gutterBottom > 
+            {data.overview}
+        </Typography>
+        <Typography variant='h5' gutterBottom > 
+            Top Cast
+        </Typography>
+
+        <Grid item container spacing={2} > 
+            {data && data.credits.cast.map((character, i) => (
+              // get actors with Images only
+              character.profile_path && (
+                  <Grid key={i} item  xs={4} md={2} component={Link} to={`/actors/${character.id}`} style={{textDecoration: 'none'}} > 
+                <img className={classes.castImage} src={`https://image.tmdb.org/t/p/w500/${character.profile_path}`} alt={character.name} />
+                <Typography color='textPrimary'> { character.name } </Typography>
+                <Typography color='textSecondary'> { character.character.split('/')[0] } </Typography>
+                </Grid>
+                )
+            )).slice(0 , 6) } 
         </Grid>
         
       </Grid>
