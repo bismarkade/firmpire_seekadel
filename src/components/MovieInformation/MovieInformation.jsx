@@ -1,6 +1,6 @@
 import React from 'react';
-import { Modal, Typography, Button, Buttongroup, Grid, Box, CircularProgress, UseMediaQuery, Rating  } from '@mui/material';
-import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutline, Remove, ArrowBack } from '@mui/icons-material';
+import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, UseMediaQuery, Rating  } from '@mui/material';
+import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutlined, Remove, ArrowBack } from '@mui/icons-material';
 import { Link , useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -16,8 +16,19 @@ const MovieInformation = () => {
   const  { id } = useParams();
   const { data, isFetching , error } = useGetMovieQuery(id);
   const dispatch = useDispatch();
-
   console.log(data);
+
+  const isMovieFavorited = true;
+  const isMovieWatchlisted = false;
+
+  const addToFavourites = () => {
+
+  };
+
+  const addToWatchlist = () => {
+
+  };
+
 
   if(isFetching){
     return ( 
@@ -93,6 +104,32 @@ const MovieInformation = () => {
                 </Grid>
                 )
             )).slice(0 , 6) } 
+        </Grid>
+        <Grid  item container style={{ marginTop: '2rem'}} >
+              <div className={classes.buttonsContainer}>
+                  <Grid item xs={12} sm={6}  className={classes.buttonsContainer} >
+                    <ButtonGroup size='small' variant='outlined'>
+                      <Button target='_blank' rel='noopener noreferrer' href={data.homepage}  endIcon={<Language />} > Website </Button>
+                      <Button target='_blank' rel='noopener noreferrer' href={`https://www.imdb.com/title/${data.imdb_id}`}  endIcon={<MovieIcon />} > IMDB </Button>
+                      <Button onClick={() => {}} href='#'  endIcon={<Theaters />} > Trailors </Button>
+                    </ButtonGroup>
+                  </Grid>
+                  <Grid item xs={12} sm={6}  className={classes.buttonsContainer} >
+                    <ButtonGroup size='medium' variant='outlined'>
+                      <Button onClick={addToFavourites} href='#'  endIcon={ isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite /> } > 
+                          { isMovieFavorited ?  'Unfavorite' : 'Favorite'}
+                       </Button>
+                      <Button onClick={addToWatchlist} href='#'  endIcon={ isMovieWatchlisted ? <Remove /> : <PlusOne /> } > 
+                          WatchList
+                       </Button>
+                      <Button   endIcon={ <ArrowBack /> } sx={{borderColor: 'primary.main'}} > 
+                          <Typography style={{ textDecoration: 'none'}} component={Link} to='/' color='inherit' variant='subtitle2'> 
+                              Back
+                          </Typography>
+                       </Button>
+                    </ButtonGroup>
+                  </Grid>
+              </div>
         </Grid>
         
       </Grid>
