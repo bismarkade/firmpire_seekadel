@@ -5,18 +5,21 @@ import { Link , useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
-import { useGetMovieQuery } from '../../services/TMBD';
+import { useGetMovieQuery, useGetRecommendationsQuery } from '../../services/TMBD';
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 import useStyles from './styles';
 import genreIcons from '../../assets/genres';
+import { MovieList } from '..'
 
 const MovieInformation = () => {
   const classes = useStyles();
   const  { id } = useParams();
   const { data, isFetching , error } = useGetMovieQuery(id);
+  const { data: recommendations, isFetching: isRecommendationsFetching} = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id});
   const dispatch = useDispatch();
-  console.log(data);
+  // console.log(data);
+  console.log(recommendations);
 
   const isMovieFavorited = true;
   const isMovieWatchlisted = false;
@@ -55,7 +58,7 @@ const MovieInformation = () => {
               alt={data.title}
           />
       </Grid>
-      <Grid item container direction='column' lg={7} >
+      <Grid item container direction='column' lg={7}  >
         <Typography variant='h3' align='center' gutterBottom>
           {data.title} ({data.release_date.split('-')[0]})
         </Typography>
@@ -133,6 +136,16 @@ const MovieInformation = () => {
         </Grid>
         
       </Grid>
+      <Box marginTop='5rem' width='100%'>
+        <Typography variant='h3' gutterBottom align='center' > 
+                You might also like
+        </Typography>
+        {/* Loop through the recommended movies... */}
+        {recommendations 
+          ? <MovieList  movies={recommendations} numberOfMovies={12} />
+          : <Box> Sorry, Nothing was Found </Box>
+        }
+      </Box>
     </Grid>
   );
 };
