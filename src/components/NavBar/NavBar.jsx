@@ -21,7 +21,7 @@ const NavBar = () => {
   // const isAuthenticated = false;
   const dispatch = useDispatch();
 
-  console.log(user);
+  // console.log(user);
 
   const token = localStorage.getItem('request_token');
   const sessionIdFromLocalStorage = localStorage.getItem('session_id');
@@ -34,14 +34,12 @@ const NavBar = () => {
         // check if local storage sessionID exist
         if(sessionIdFromLocalStorage){
           // then get the user data 
-          console.log(1);
           // destructure and rename to userData
           const { data : userData } = await moviesApi.get(`/account?session_id=${sessionIdFromLocalStorage}`);
 
           // dispach the userdata when we have the session id
           dispatch(setUser(userData));
         }else {
-          console.log(2);
           const sessionId = await createSessionId();
 
           const { data : userData } = await moviesApi.get(`/account?session_id=${sessionId}`);
