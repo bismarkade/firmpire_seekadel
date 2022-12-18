@@ -12,8 +12,8 @@ const authSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
             state.user = action.payload;
-            console.log("inside auth js");
-            console.log(action.payload);
+            // console.log("inside auth js");
+            // console.log(action.payload);
             state.isAuthenticated = true; 
             state.sessionId = localStorage.getItem('session_id');
 
