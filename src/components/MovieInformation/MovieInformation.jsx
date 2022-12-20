@@ -20,11 +20,11 @@ const MovieInformation = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false)
 
-  console.log('data -->');
-  console.log(data);
+  // console.log('data -->');
+  // console.log(data);
 
-  console.log('recommendations');
-  console.log(recommendations);
+  // console.log('recommendations');
+  // console.log(recommendations);
 
   const isMovieFavorited = true;
   const isMovieWatchlisted = false;

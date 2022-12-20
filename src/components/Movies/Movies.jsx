@@ -12,8 +12,8 @@ const Movies = () => {
   const { genreIdOrCategoryName, searchQuery} = useSelector((state) => state.currentGenreOrCategory)
   const { data, error, isFetching } = useGetMoviesQuery({genreIdOrCategoryName, page, searchQuery}); 
 
-  // console.log('genreIdOrCategoryName:');
-  // console.log(genreIdOrCategoryName);
+  console.log('selected genreIdOrCategoryName:');
+  console.log(data);
 
   if(isFetching){
     return (
