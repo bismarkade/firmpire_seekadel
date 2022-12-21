@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import useStyle from './styles';
 
 const Movie = ({ movie, i }) => {
-    console.log(movie, i);
+    // console.log(movie, i);
     // console.log(movie.poster_path);
     const classes = useStyle();
 
