@@ -7,7 +7,7 @@ import { ArrowBack } from '@mui/icons-material';
 
 import { useGetActorsDetailsQuery, useGetMoviesByActorIdQuery } from '../../services/TMBD';
 import useStyles from './styles';
-import { MovieList } from '..'
+import { MovieList, Pagination } from '..'
 // use params to get the id of the actor's id
 // make a new call using redux toolkit querry --> get actor details call
 // tmdb API docs  --> use the id to get info about the specific actor
@@ -17,18 +17,20 @@ import { MovieList } from '..'
 
 
 const Actors = () => {
-  const classes = useStyles();
   const  { id } = useParams();
   const history = useHistory();
-  const page = 1; 
+  const classes = useStyles();
+  const [ page, setPage ] = useState(1);
   
   const { data, isFetching , error } = useGetActorsDetailsQuery(id);
   const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
-  
-  console.log('Actor data');
-  console.log(data);
 
-  if(isFetching){
+  console.log(movies);
+  console.log(data);
+  // console.log(movies.results);
+  
+
+  if(isFetching ){
     return (
       <Box 
         display='flex' justifyContent='center'  
@@ -49,6 +51,7 @@ const Actors = () => {
       </Box>
     )
   };
+  
 
   return (
     <>
@@ -84,7 +87,11 @@ const Actors = () => {
         <Typography variant='h2' gutterBottom align='center'>
             Movies
         </Typography>
-        {movies && <MovieList  movies={movies} numberOfMovies={12} />}
+        {movies && <MovieList  movies={movies} numberOfMovies={12} />} 
+        <Pagination currentPage={page} setPage={setPage} 
+        //totalPages={movies.total_pages} 
+
+        />  
       </Box>
 
     </>

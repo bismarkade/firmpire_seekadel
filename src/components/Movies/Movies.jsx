@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 import { useGetMoviesQuery } from '../../services/TMBD';
-import {MovieList} from '..';
+import {MovieList, Pagination} from '..';
 
 
 const Movies = () => {
@@ -12,8 +12,8 @@ const Movies = () => {
   const { genreIdOrCategoryName, searchQuery} = useSelector((state) => state.currentGenreOrCategory)
   const { data, error, isFetching } = useGetMoviesQuery({genreIdOrCategoryName, page, searchQuery}); 
 
-  console.log('selected genreIdOrCategoryName:');
-  console.log(data);
+  // console.log('selected genreIdOrCategoryName:');
+  // console.log(data);
 
   if(isFetching){
     return (
@@ -44,8 +44,8 @@ const Movies = () => {
   return (
     <div>
     {/* parse movies as props with the data from the api */}
-    <MovieList movies={data} />
-    
+      <MovieList movies={data} />
+      <Pagination currentPage={page} setPage={setPage} totalPages={data.total_pages} />    
     </div>
   );
 };
