@@ -3,18 +3,9 @@ import { Box, Button, CircularProgress, Grid, Typography  } from '@mui/material'
 import { useHistory , useParams } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 
-
-
 import { useGetActorsDetailsQuery, useGetMoviesByActorIdQuery } from '../../services/TMBD';
 import useStyles from './styles';
-import { MovieList, Pagination } from '..'
-// use params to get the id of the actor's id
-// make a new call using redux toolkit querry --> get actor details call
-// tmdb API docs  --> use the id to get info about the specific actor
-// use the newly created useGetActorHook to get actor info to the component
-
-
-
+import { MovieList, Pagination } from '..';
 
 const Actors = () => {
   const  { id } = useParams();
@@ -23,12 +14,10 @@ const Actors = () => {
   const [ page, setPage ] = useState(1);
   
   const { data, isFetching , error } = useGetActorsDetailsQuery(id);
-  const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
+  const { data: movies, isLoading, error: moviesError, isFetching: moviesFeching, isSuccess  } = useGetMoviesByActorIdQuery({ id, page });
 
-  console.log(movies);
-  console.log(data);
-  // console.log(movies.results);
-  
+  // console.log('movies');
+  // console.log(movies);
 
   if(isFetching ){
     return (
@@ -88,10 +77,7 @@ const Actors = () => {
             Movies
         </Typography>
         {movies && <MovieList  movies={movies} numberOfMovies={12} />} 
-        <Pagination currentPage={page} setPage={setPage} 
-        //totalPages={movies.total_pages} 
-
-        />  
+        <Pagination currentPage={page} setPage={setPage}  totalPages={isSuccess ? movies.total_pages : 5 } />  
       </Box>
 
     </>

@@ -7,6 +7,13 @@ import { Movie } from '..';
 const MovieList = ({ movies, numberOfMovies }) => {
     const classes = useStyles();
 
+    // console.log('movies from actor');
+    // console.log(movies.results);
+    // movies.results.map((movie, id) => {
+    //   console.log(movie);
+    // })
+
+
   return (
     <Grid container className={classes.moviesContianer} >
         {movies.results.slice(0, numberOfMovies).map((movie, i) => (
