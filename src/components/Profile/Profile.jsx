@@ -29,7 +29,7 @@ const Profile = () => {
 
   return (
     <Box >
-      <Box  display='flex' justifyContent='space-between' >
+      <Box  display='flex' justifyContent='space-between' flexDirection='column' >
           <Typography variant='h4' gutterBottom > My Profile </Typography>
           <Button color='inherit' onClick={logout} >
               Logout &nbsp; <ExitToApp />
