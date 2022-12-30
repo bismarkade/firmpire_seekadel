@@ -49,9 +49,9 @@ export const tmdbApi = createApi({
             query: (id) => `/movie/${id}?append_to_response=videos,credits&api_key=${tmdbApiKey}`  
         }),
 
-        //* Get User Specific Lists
+        //* Get User Specific Lists (Favorited or watchlisted)
         getList: builder.query({
-            query: ({ listName, accountId, sessionId, page }) => `/account/${accountId}/${listName}?api_key=${tmdbApiKey}&session_id=${sessionId}$page=${page}`
+            query: ({ listName, accountId, sessionId, page }) => `/account/${accountId}/${listName}?api_key=${tmdbApiKey}&session_id=${sessionId}&page=${page}`
         }),
 
         getRecommendations: builder.query({

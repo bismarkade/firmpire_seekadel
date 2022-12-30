@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, UseMediaQuery, Rating  } from '@mui/material';
 import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutlined, Remove, ArrowBack } from '@mui/icons-material';
-import { Link , useParams } from 'react-router-dom';
+import { Link , useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -14,54 +14,69 @@ import genreIcons from '../../assets/genres';
 import { MovieList } from '..'
 
 const MovieInformation = () => {
-  const user = useSelector(userSelector);
+  const history = useHistory();
+  const {user} = useSelector(userSelector);
   const classes = useStyles();
   const  { id } = useParams();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false)
+  
+  // console.log('user- test');
+  // console.log(user.user.id);
 
   const { data, isFetching , error } = useGetMovieQuery(id);
-  const { data: favoriteMovies } = useGetListQuery({ listName: 'favorite/movies', accountId: user.id, sessionId: localStorage.getItem('session_id'), page: 1  });
+  const { data: favoriteMovies, isFetching: isFavoriteFetching } = useGetListQuery({ listName: 'favorite/movies', accountId: user.id, sessionId: localStorage.getItem('session_id'), page: 1  });
   const { data: watchlistMovies } = useGetListQuery({ listName: 'watchlist/movies', accountId: user.id, sessionId: localStorage.getItem('session_id'), page: 1  });
   const { data: recommendations, isFetching: isRecommendationsFetching} = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id});
   
 
   const [isMovieFavorited, setIsMovieFavorited] = useState(false);
-  const [isMovieWatchlisted, setIsMovieWatchlisted] = useState(false)
+  const [isMovieWatchlisted, setIsMovieWatchlisted] = useState(false);
+
+  // if(favoriteMovies && data ){
+  //   console.log(data.id);
+  //   console.log('#######');
+  //   console.log(!!favoriteMovies.results.find((movie) => movie.id === data.id));
+  // }
+
+
 
   // knowing if we have favorited or watchlisted a movie before
   // !{} -> falsy 
   // !!{} -> falsy -> true
-  
+
   useEffect(() => {
-    setIsMovieFavorited(!!favoriteMovies.results.find((movie) => movie.id === data.id));
+    if(favoriteMovies && data ){
+      setIsMovieFavorited(!!favoriteMovies.results.find((movie) => movie.id === data.id));
+    }
   }, [favoriteMovies, data])
   
   useEffect(() => {
-    setIsMovieWatchlisted(!!watchlistMovies.results.find((movie) => movie.id === data.id));
+    if(watchlistMovies && data ){
+      setIsMovieWatchlisted(!!watchlistMovies.results.find((movie) => movie.id === data.id));
+    }
   }, [watchlistMovies, data])
   
  
-  // create a direct api call here with axious instead of redux query
+  // create a direct api call here with axious instead of redux query || becoz redux tool querry allow us to fetch certain things only as hooks
   // api call to our tmdb 
   const addToFavourites = async () => {
-    await axios.post(`https://api.themoviedb.org/3/account/${user.id}/favourite?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${localStorage.getItem('session_id')}`, 
+    await axios.post(`https://api.themoviedb.org/3/account/${user.id}/favorite?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${localStorage.getItem('session_id')}`, 
             {
-              data: JSON, 
               media_type: 'movie',
               media_id: id,
-              fovorite: !isMovieFavorited,
+              favorite: !isMovieFavorited,
             } );
     setIsMovieFavorited((prev) => !prev)    
   };
+  // console.log(addToFavourites);
 
   const addToWatchlist = async () => {
     await axios.post(`https://api.themoviedb.org/3/account/${user.id}/watchlist?api_key=${process.env.REACT_APP_TMDB_KEY}&session_id=${localStorage.getItem('session_id')}`, 
     {
-      data: JSON, 
       media_type: 'movie',
       media_id: id,
-      fovorite: !isMovieWatchlisted,
+      watchlist: !isMovieWatchlisted,
     } );
     setIsMovieWatchlisted((prev) => !prev)    
   };
@@ -159,8 +174,8 @@ const MovieInformation = () => {
                       <Button onClick={addToWatchlist} href='#'  endIcon={ isMovieWatchlisted ? <Remove /> : <PlusOne /> } > 
                           WatchList
                        </Button>
-                      <Button   endIcon={ <ArrowBack /> } sx={{borderColor: 'primary.main'}} > 
-                          <Typography style={{ textDecoration: 'none'}} component={Link} to='/' color='inherit' variant='subtitle2'> 
+                      <Button   endIcon={ <ArrowBack /> } sx={{borderColor: 'primary.main'}}  onClick={() => history.goBack()}> 
+                          <Typography style={{ textDecoration: 'none'}} color='inherit' variant='subtitle2'> 
                               Back
                           </Typography>
                        </Button>
