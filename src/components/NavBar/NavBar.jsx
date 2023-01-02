@@ -1,11 +1,11 @@
-import React , {useEffect, useState} from 'react';
+import React , {useContext, useEffect, useState} from 'react';
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
 import { Menu, AcUnit, AccountCircle, Brightness4, Brightness7, NoBackpackSharp} from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 
-
+import { ColorModeContext } from '../../utils/ToggleColorMode';
 import { setUser, userSelector } from '../../features/auth';
 import {fetchToken, createSessionId, moviesApi } from './../../utils/index';
 import { Search, Sidebar} from '..';
@@ -22,6 +22,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   // console.log(user);
+  const colorMode = useContext(ColorModeContext);
 
   const token = localStorage.getItem('request_token');
   const sessionIdFromLocalStorage = localStorage.getItem('session_id');
@@ -60,23 +61,11 @@ const NavBar = () => {
            {/* implement media Query here */}
            {/* if mobile view */}
            {isMobile && (
-              <IconButton 
-                color="inherit"
-                edge="start"
-                style={{ outline: 'none'}}
-                // toggle the sidebar on when in mobile
-                onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)} // sets the Mobile function to a different state it was previously
-                className={classes.menuButton}
-              >
+              <IconButton color="inherit" edge="start" style={{ outline: 'none'}} onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)} className={classes.menuButton}>
                 <Menu />
-
               </IconButton>
            ) }
-           <IconButton 
-              color="inherit"
-              sx={{ ml: 1}} // sx allows for custom mui style
-              onClick={()=> {}}
-           >
+           <IconButton   color="inherit" sx={{ ml: 1}}  onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === 'dark' ? <Brightness7/> : <Brightness4/>}
            </IconButton>
            {/* render a search component if its not mobile */}
