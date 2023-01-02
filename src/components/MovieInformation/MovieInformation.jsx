@@ -81,7 +81,6 @@ const MovieInformation = () => {
     setIsMovieWatchlisted((prev) => !prev)    
   };
 
-
   if(isFetching){
     return ( 
     <Box display='flex' justifyContent='center' alignContent='center'> 

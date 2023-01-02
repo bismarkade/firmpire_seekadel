@@ -1,25 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Provider } from 'react-redux';
 
+import ToggleColorModeProvider from './utils/ToggleColorMode';
 import App from './components/App';
 import store from './app/store';
 import './index.css' ; 
 
-// Hook for the theme --> && parsing an empty Object
-const theme = createTheme({});
-
 ReactDOM.render(
     // Store is our entire state and must me accessible to all components
     <Provider store={store}> 
-        <ThemeProvider theme={theme}>
+        <ToggleColorModeProvider>
             <BrowserRouter >
-                < App />
+                <App />
             </BrowserRouter>
-        </ThemeProvider>
+        </ToggleColorModeProvider>
     </Provider>, 
     document.getElementById('root')
 );
